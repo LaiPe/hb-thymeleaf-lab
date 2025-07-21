@@ -7,9 +7,11 @@
 </head>
 <body>
     <header>
-        <h1>BONJOUR</h1>
-        <a th:href="@{/}">Accueil</a>
-        <a th:href="@{/salut}">Dire Bonjour</a>
+        <h1>hb-thymeleaf-lab</h1>
+        <a th:href="@{/}" th:text="#{nav.home}">Home</a>
+        <a th:href="@{/salut}" th:text="#{nav.greeting}">Say hello!</a>
+        <a th:href="@{/products}" th:text="#{nav.products}">Products</a>
+        <a th:href="@{/products/add}" th:text="#{nav.new_product}">New product</a>
     </header>
     <main>
         <div th:replace="${content}"></div>

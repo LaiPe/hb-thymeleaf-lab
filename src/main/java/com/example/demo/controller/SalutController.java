@@ -13,7 +13,7 @@ public class SalutController {
         return "index";
     }
     @GetMapping("/salut")
-    public String salutPage(@RequestParam(name = "name",  defaultValue = "World") String name, Model model) {
+    public String salutPage(@RequestParam(name = "name",  defaultValue = "") String name, Model model) {
         model.addAttribute("name", name);
         return "salut";
     }

@@ -2,32 +2,30 @@
 <html lang="en" th:replace="fragments/layout :: layout(~{::title},~{::section})">
 <head>
 
-    <title>Nos produits</title>
+    <title th:text="#{products.title}">Nos produits</title>
 </head>
 
 <section>
-    <h2>
-        Nos produits
-    </h2>
+    <h2 th:text="#{products.h2}">Nos produits</h2>
     <div>
-        <a th:href="@{/products/add}">Ajouter un produit</a>
+        <a th:href="@{/products/add}" th:text="#{products.add}">Ajouter un produit</a>
     </div>
-    <p th:unless="${#lists.isEmpty(productList)}"> voici nos articles:</p>
-    <p th:if="${#lists.isEmpty(productList)}">Aucun produit disponible</p>
+    <p th:unless="${#lists.isEmpty(productList)}" th:text="#{products.available} + ' :'"> voici nos articles:</p>
+    <p th:if="${#lists.isEmpty(productList)}" th:text="#{products.none}">Aucun produit disponible</p>
     <table th:unless="${#lists.isEmpty(productList)}">
         <thead>
-            <tr><th>#</th>
-                <th>Nom</th>
-                <th>Prix</th>
-                <th>Parité</th>
+            <tr><th th:text="#{header.number}">#</th>
+                <th th:text="#{header.name}">Nom</th>
+                <th th:text="#{header.price}">Prix</th>
+                <th th:text="#{header.parity}">Parité</th>
             </tr>
         </thead>
         <tbody>
             <tr th:each="p, iterStat : ${productList}">
                 <td th:text="${iterStat.count}">1</td>
                 <td th:text="${p.name}">Nom du produit</td>
-                <td th:text="${#numbers.formatCurrency(p.price)}">Prix du produit</td>
-                <td th:text="${iterStat.odd ? 'impair' :'pair'}"></td>
+                <td th:text="${#numbers.formatDecimal(p.price, 1, 2)} + ' ' + #{currency}">Prix du produit</td>
+                <td th:text="${iterStat.odd ? #messages.msg('header.odd') : #messages.msg('header.even')}">odd/even</td>
             </tr>
         </tbody>
     </table>

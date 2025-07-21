@@ -1,16 +1,16 @@
 <!DOCTYPE html>
 <html lang="en" th:replace="fragments/layout :: layout(~{::title},~{::section})">
 <head>
-    <title>Salut</title>
+    <title th:text="#{greeting.title}">Salut</title>
 </head>
 <body>
     <section>  
-        <h2 th:text="'Bonjour ' + ${name}">Bonjour Monde</h2>
+        <h2 th:if="${#strings.isEmpty(name)}" th:text="#{greeting.title.hello} + ' ' + #{greeting.title.name}">Bonjou Bonjou</h2>
+        <h2 th:unless="${#strings.isEmpty(name)}" th:text="#{greeting.title.hello} + ' ' + ${name}"></h2>
         <form th:action="@{/salut}" method="get">
-            <label>votre nom :
-                <input type="text" name="name" placeholder="World">
-            </label>
-            <button type="submit">Dire bonjour</button>
+            <label for="name" th:text="#{greeting.form.label} + ' :'">votre nom :</label>
+            <input type="text" id="name" th:placeholder="#{greeting.title.name}" name="name">
+            <button type="submit" th:text="#{greeting.form.submit}">Dire bonjour</button>
         </form> 
 
     </section>

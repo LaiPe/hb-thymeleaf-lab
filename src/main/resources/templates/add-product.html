@@ -1,24 +1,24 @@
 <!DOCTYPE html>
 <html lang="en" th:replace="fragments/layout :: layout(~{::title},~{::section})">
 <head>
-    <title>Ajout de produits</title>
+    <title th:text="#{new_product.title}">Ajout de produits</title>
 </head>
     <section>
-        <h2>Ajouter un produit</h2>
+        <h2 th:text="#{new_product.title}">Ajouter un produit</h2>
         <form th:action="@{/products/add}" method="post" th:object="${product}">
             <div>
-                <label for="name">Nom du produit :</label>
-                <input type="text" id="name" placeholder="Nom du produit" th:field="*{name}">
+                <label for="name" th:text="#{new_product.form.name} + ' :'">Nom du produit :</label>
+                <input type="text" id="name" th:placeholder="#{new_product.form.name}" th:field="*{name}">
                 <div th:if="${#fields.hasErrors('name')}" th:errors="*{name}" style="color: red"></div>
             </div>
 
             <div>
-                <label for="price">Prix du produit :</label>
+                <label for="price" th:text="#{new_product.form.price} + ' :'">Prix du produit :</label>
                 <input type="number" id="price" placeholder="Prix du produit" step="0.01" th:field="*{price}">
                 <div th:if="${#fields.hasErrors('price')}" th:errors="*{price}" style="color: red"></div>
             </div>
-            <button type="submit">Ajouter le produit</button>
-            <a th:href="@{/products}">Retour à la liste des produits</a>
+            <button type="submit" th:text="#{new_product.form.submit}">Ajouter le produit</button>
+            <a th:href="@{/products}" th:text="#{new_product.redirect}">Retour à la liste des produits</a>
         </form>
     </section>
 
